@@ -1,0 +1,33 @@
+    {
+        "MySecret": {
+            "Type": "AWS::SecretsManager::Secret",
+            "Properties": {
+                "Description": "This is a secret that I want to attach a resource-based policy to"
+            }
+        },
+        "MySecretResourcePolicy": {
+            "Type": "AWS::SecretsManager::ResourcePolicy",
+            "Properties": {
+                "SecretId": {
+                    "Ref": "MySecret"
+                },
+                "BlockPublicPolicy": "true",
+                "ResourcePolicy": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Resource": "*",
+                            "Action": "secretsmanager:DeleteSecret",
+                            "Effect": "Deny",
+                            "Principal": {
+                                "AWS": {
+                                    "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:root"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+    }
