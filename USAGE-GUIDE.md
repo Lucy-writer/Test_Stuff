@@ -1,6 +1,6 @@
 # Using s2n-tls
 
-s2n-tls is a C library, and is built using Make. To clone the latest
+s2n-tls is a C library, and you build it using using Make. To clone the latest
 copy of s2n-tls from git use:
 
 ```shell
